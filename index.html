@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Drive</title>
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  font-family: "Product Sans", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  height: 4em;
+  border-bottom: 1px solid #bbbcbd;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  width: 100vw;
+}
+.search-box {
+  width: 30em;
+  background-color: #f1f3f4;
+  border: none;
+  height: 3em;
+  padding-left: 2em;
+}
+.s {
+  background-color: #f1f3f4;
+  padding: 0.5em;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-left: 10em;
+}
+.settings {
+  background-color: #f1f3f4;
+  padding: 0.2em;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.profile {
+  width: 32px;
+  position: absolute;
+  right: 1em;
+  border-radius: 50%;
+}
+.container {
+  display: flex;
+  font-family: Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+}
+.left-container {
+  flex: 1;
+}
+.right-container {
+  flex: 4;
+  background-color: white;
+}
+.new {
+  width: 9em;
+  height: 4em;
+  border: none;
+  box-shadow: 0 0 3px black;
+  margin-top: 1em;
+  padding-right: 2em;
+  border-radius: 100px;
+  background-color: white;
+  cursor: pointer;
+  margin-left: 2em;
+}
+.new:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgb(97, 97, 97);
+  transition: all 0.5s ease;
+}
+.left-container p {
+  display: flex;
+  align-items: center;
+  margin-top: 1em;
+  cursor: pointer;
+  color: #5f6368;
+  height: 3em;
+  padding-left: 1em;
+  width: 90%;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.left-container p:hover {
+  background-color: #efeff0;
+}
+progress,
+pre {
+  margin-left: 1em;
+}
+.buy {
+  margin-top: 1em;
+  background-color: white;
+  border: 1px solid #185abc;
+  margin-left: 1em;
+  color: #185abc;
+  width: 10em;
+  height: 3em;
+  border-radius: 5px;
+}
+.buy:hover {
+  background-color: #f6fafe;
+}
+.container-nav {
+  display: flex;
+  display: flex;
+  align-items: center;
+  height: 4em;
+  border-bottom: 1px solid #bbbcbd;
+
+  background-color: white;
+}
+.content {
+  padding-left: 5em;
+}
+.my-drive {
+  margin-left: 1em;
+  font-weight: 100;
+  cursor: pointer;
+}
+.container-nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7em;
+  height: 3em;
+  margin-left: 10em;
+  margin-right: 3em;
+  border: 1px solid rgb(207, 207, 207);
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.container-nav button img {
+  margin-right: 1em;
+}
+.container-nav button:hover {
+  transition: all 0.5s ease;
+  box-shadow: 0 0 10px grey;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.list {
+  display: none;
+}
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 18em;
+  height: 5em;
+  margin-top: 1em;
+  margin-left: 1em;
+  border-radius: 5px;
+  border: 1px solid rgb(207, 207, 207);
+}
+.box:hover {
+  transition: all 0.8s ease;
+  box-shadow: 0 0 100px rgb(192, 192, 192);
+}
+th {
+  background-color: white;
+  width: 17em;
+  height: 3em;
+  font-weight: 100;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+td {
+  text-align: center;
+  border-bottom: 1px solid rgb(207, 207, 207);
+  width: 17em;
+  height: 3em;
+  font-weight: 100;
+}
+.folder-name {
+  text-align: left;
+}
+@media screen and (max-width: 885px) {
+  .search-box {
+    width: 10em;
+  }
+  .s {
+    margin-left: 5em;
+  }
+  .box {
+    width: 15em;
+  }
+}
+@media screen and (max-width: 785px) {
+  .box {
+    width: 12em;
+  }
+}
+
+@media screen and (max-width: 542px) {
+  .header {
+    width: 150vw;
+  }
+}
+@media screen and (max-width: 420px) {
+  .header {
+    width: 200vw;
+  }
+}
+@media screen and (max-width: 342px) {
+  .header {
+    width: 250vw;
+  }
+}
+@media screen and (max-width: 262px) {
+  .header {
+    width: 300vw;
+  }
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <p id="drive">Drive</p>
+      <input class="search-box" type="text" placeholder="Search in Drive" />
+      <img src="settings.png" class="settings" alt="" />
+    </div>
+    <div class="container">
+      <div class="left-container">
+        <button class="new">New</button>
+        <p>My Drive</p>
+        <p>Computers</p>
+        <p>Shared with me</p>
+        <p>Recent</p>
+        <p>Bin</p>
+        <hr />
+        <p>Storage</p>
+        <progress value="30" max="100"></progress>
+        <pre>6.13 GB of 15 GB used </pre>
+        <button class="buy">Buy Storage</button>
+      </div>
+      <div class="right-container">
+        <div class="container-nav">
+          <h2 class="my-drive">My Drive</h2>
+          <button class="grid-btn">
+            <img
+              src="https://img.icons8.com/material-outlined/24/000000/activity-grid-2.png"
+              width="18"
+            />
+            Grid
+          </button>
+          <button class="list-btn">
+            <img
+              src="https://img.icons8.com/material-outlined/24/000000/list.png"
+              width="18"
+            />List
+          </button>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+            <div class="box">
+              <p>Folder</p>
+            </div>
+          </div>
+          <div class="list">
+            <div class="list-view">
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Owner</th>
+
+                  <th>File Size</th>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td class="folder-name">Folder</td>
+                  <td>me</td>
+
+                  <td>-</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        let grid_btn = document.querySelector(".grid-btn");
+let list_btn = document.querySelector(".list-btn");
+grid_btn.addEventListener("click", function () {
+  let grid = document.querySelector(".grid");
+  let list = document.querySelector(".list");
+  grid.style.display = "flex";
+  list.style.display = "none";
+});
+list_btn.addEventListener("click", function () {
+  let list = document.querySelector(".list");
+  let grid = document.querySelector(".grid");
+  grid.style.display = "none";
+  list.style.display = "block";
+});
+    </script>
+  </body>
+</html>
